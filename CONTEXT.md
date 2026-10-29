@@ -29,6 +29,8 @@ A sintaxe curta, sozinha, não diferencia o projeto. Uma linguagem desconhecida 
 
 ## M0: o primeiro transpiler
 
+O contrato canônico e as decisões fixadas do M0 estão em [CORE.md §0.1](https://github.com/pedroribeirodev/dobra/blob/main/CORE.md#01-decisões-fixadas-para-o-m0). O resumo abaixo não substitui aquela seção.
+
 Fluxo proposto:
 
 ```text
@@ -74,6 +76,6 @@ Compararemos tarefas equivalentes de criação e alterações sucessivas. Contar
 
 ## Questões abertas e pedido ao Grok
 
-Permanecem abertos: stack do compilador, parser, gramática exata, regras de espaços/texto, API de exportação, escala de compilação, empacotamento, matriz de ambientes e licença. Os documentos `SPEC.md`, `CORE.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
+Já decididos em CORE.md §0.1: stack (TypeScript), parser, regras de espaços/texto, atributos, segurança de URLs, API de exportação e diagnósticos. Permanecem abertos: gramática formal completa, escala de compilação, empacotamento, matriz de ambientes e licença. Os documentos `SPEC.md`, `CORE.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
 
 **Pedido ao Grok:** faça uma crítica arquitetural independente. Identifique hipóteses frágeis, ambiguidades e riscos de manutenção. Proponha a menor gramática e o menor transpiler que satisfaçam M0, com exemplos válidos e inválidos e testes de comportamento. Compare alternativas de implementação, explicitando requisitos de escala antes de escolher stack. Preserve a composição livre e o escopo incremental. Separe decisões necessárias agora das futuras e indique como medir se uma linguagem nova se justifica. Não presuma recursos implementados, benchmark favorável, domínio comprado ou licença definida.
