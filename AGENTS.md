@@ -6,7 +6,7 @@
 - Leia README.md, SPEC.md e CORE.md antes de propor implementação. Consulte o histórico Git para entender mudanças de decisão.
 - Nome definido: Dobra; extensão `.dobra`; CLI planejada `dobra`.
 - Eficiência para LLM e desempenho no navegador têm o mesmo peso. Não anunciar ganhos sem evidência reproduzível.
-- Licença, stack, gramática exata e matriz de ambientes ainda precisam ser definidas.
+- Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; gramática formal completa e matriz de ambientes ainda precisam ser definidas.
 
 ## Escopo e decisões
 

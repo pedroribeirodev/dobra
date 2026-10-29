@@ -1,6 +1,6 @@
 # Contribuindo com Dobra
 
-**Status em 28/10/2026:** repositório de planejamento da linguagem Dobra; transpiler ainda não implementado. A licença de distribuição será escolhida antes do primeiro lançamento como open source. Ainda não há pacote instalável ou resultados de desempenho.
+**Status em 28/10/2026:** repositório de planejamento da linguagem Dobra; transpiler ainda não implementado. Licença: MIT ([LICENSE](LICENSE)). Ainda não há pacote instalável ou resultados de desempenho.
 
 ## Como queremos trabalhar
 
@@ -35,7 +35,7 @@ Uma proposta de otimização deve preservar o contrato funcional e visual e segu
 
 ## Preparação do primeiro lançamento
 
-- Adicionar o texto da licença escolhida antes de apresentar a distribuição como open source. Nome e repositório já estão definidos: Dobra, `pedroribeirodev/dobra`.
+- Licença MIT adicionada em [LICENSE](LICENSE). Nome e repositório já estão definidos: Dobra, `pedroribeirodev/dobra`.
 - Publicar estado real de implementação e limitações. A abertura pode começar na fase de desenho; um exemplo executável amplia a utilidade do convite a implementadores.
 - Disponibilizar SPEC, CORE, tarefas pequenas e um canal de discussão.
 - Quando M0 existir, adicionar instalação, exemplo, comando de build, comando de verificação e ambientes realmente testados.
@@ -51,4 +51,4 @@ Uma proposta de otimização deve preservar o contrato funcional e visual e segu
 >
 > Ainda não demonstramos vantagem de tokens ou runtime. Queremos medir isso publicamente, com comparações reproduzíveis e espaço para resultados que contrariem a hipótese.
 
-Repositório: [pedroribeirodev/dobra](https://github.com/pedroribeirodev/dobra). Antes de divulgar o convite, atualizar o estado da licença e vincular tarefas abertas. Este convite é um rascunho; não foi enviado à comunidade.
+Repositório: [pedroribeirodev/dobra](https://github.com/pedroribeirodev/dobra). Antes de divulgar o convite, vincular tarefas abertas. Este convite é um rascunho; não foi enviado à comunidade.
