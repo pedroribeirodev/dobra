@@ -59,10 +59,10 @@ Detalhes em [SPEC.md §5](SPEC.md#5-evolução-incremental).
 
 Primeiras tarefas, na ordem de [CONTRIBUTING.md](CONTRIBUTING.md):
 
-1. **T01, mini-gramática M0:** tokens, texto/espaços, props, expressões e exemplos válidos e inválidos.
-2. **T02, corpus e harness:** casos `.dobra` + `.expected.json` e um projeto mínimo de navegador que consome a saída.
-3. **T03, parser e AST:** parser recursivo descendente em TypeScript, com intervalos de origem e diagnósticos de sintaxe.
-4. **T06, revisão no navegador:** testes de comportamento para texto, atributos, montagens independentes, descarte, teclado e cliques.
+1. **[T01](https://github.com/pedroribeirodev/dobra/issues/3), mini-gramática M0:** tokens, texto/espaços, props, expressões e exemplos válidos e inválidos.
+2. **[T02](https://github.com/pedroribeirodev/dobra/issues/4), corpus e harness:** casos `.dobra` + `.expected.json` e um projeto mínimo de navegador que consome a saída.
+3. **[T03](https://github.com/pedroribeirodev/dobra/issues/5), parser e AST:** parser recursivo descendente em TypeScript, com intervalos de origem e diagnósticos de sintaxe.
+4. **[T06](https://github.com/pedroribeirodev/dobra/issues/6), revisão no navegador:** testes de comportamento para texto, atributos, montagens independentes, descarte, teclado e cliques.
 
 Exemplos que quebram a tradução e resultados negativos também são contribuições úteis.
 
