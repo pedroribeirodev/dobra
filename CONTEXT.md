@@ -17,7 +17,7 @@ Dois objetivos têm **o mesmo peso**:
 
 O usuário decidiu desenvolver o projeto como open source e envolver a comunidade. Também definiu a sequência: **começar pelo transpiler e aumentar o nível gradualmente**. Uma primeira versão não precisa implementar um framework completo nem superar React em benchmarks.
 
-O nome escolhido é **Dobra**, com `.dobra` como extensão definida e `dobra` como nome da CLI planejada. O usuário informou que `dobra.build` estava disponível para compra; a compra e a configuração do domínio **não foram confirmadas**. A licença ainda precisa ser escolhida.
+O nome escolhido é **Dobra**, com `.dobra` como extensão definida e `dobra` como nome da CLI planejada. O usuário informou que `dobra.build` estava disponível para compra; a compra e a configuração do domínio **não foram confirmadas**. A licença escolhida é MIT.
 
 ## Problema e hipótese de diferenciação
 
@@ -76,6 +76,6 @@ Compararemos tarefas equivalentes de criação e alterações sucessivas. Contar
 
 ## Questões abertas e pedido ao Grok
 
-Já decididos em CORE.md §0.1: stack (TypeScript), parser, regras de espaços/texto, atributos, segurança de URLs, API de exportação e diagnósticos. Permanecem abertos: gramática formal completa, escala de compilação, empacotamento, matriz de ambientes e licença. Os documentos `SPEC.md`, `CORE.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
+Já decididos em CORE.md §0.1: stack (TypeScript), parser, regras de espaços/texto, atributos, segurança de URLs, API de exportação e diagnósticos. Permanecem abertos: gramática formal completa, escala de compilação, empacotamento, e matriz de ambientes. Licença decidida: MIT. Os documentos `SPEC.md`, `CORE.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
 
 **Pedido ao Grok:** faça uma crítica arquitetural independente. Identifique hipóteses frágeis, ambiguidades e riscos de manutenção. Proponha a menor gramática e o menor transpiler que satisfaçam M0, com exemplos válidos e inválidos e testes de comportamento. Compare alternativas de implementação, explicitando requisitos de escala antes de escolher stack. Preserve a composição livre e o escopo incremental. Separe decisões necessárias agora das futuras e indique como medir se uma linguagem nova se justifica. Não presuma recursos implementados, benchmark favorável, domínio comprado ou licença definida.

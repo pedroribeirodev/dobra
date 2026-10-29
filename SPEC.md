@@ -6,7 +6,7 @@
 
 Criar uma linguagem de UI de propósito geral, destinada à autoria e manutenção por pessoas e agentes. A abrangência pretendida inclui componentes isolados, sites simples, aplicações complexas e interfaces em webviews. Eficiência para LLMs e desempenho no navegador têm o mesmo peso.
 
-A direção é desenvolver o projeto como open source e envolver a comunidade. A primeira entrega será um transpiler pequeno e executável; os recursos da linguagem e as garantias crescerão por etapas. O nome definido é **Dobra**, a extensão de arquivo é `.dobra` e a CLI planejada é `dobra`. O repositório deste projeto é `pedroribeirodev/dobra`. A licença ainda será escolhida. O domínio pretendido é `dobra.build`; sua disponibilidade foi informada pelo fundador, mas a compra ainda não foi confirmada. Nenhum transpiler foi implementado e nenhum ganho foi medido.
+A direção é desenvolver o projeto como open source e envolver a comunidade. A primeira entrega será um transpiler pequeno e executável; os recursos da linguagem e as garantias crescerão por etapas. O nome definido é **Dobra**, a extensão de arquivo é `.dobra` e a CLI planejada é `dobra`. O repositório deste projeto é `pedroribeirodev/dobra`. A licença é MIT ([LICENSE](LICENSE)). O domínio pretendido é `dobra.build`; sua disponibilidade foi informada pelo fundador, mas a compra ainda não foi confirmada. Nenhum transpiler foi implementado e nenhum ganho foi medido.
 
 Documentos complementares:
 
@@ -127,7 +127,7 @@ As medições começam em M0 como instrumentação. Ensaios comparativos podem o
 | Linguagem de implementação do compilador e parser | Decidido: TypeScript, parser recursivo descendente escrito à mão ([CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0)); empacotamento segue aberto | Engenharia + usuário |
 | Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0); gramática formal completa entra com o T01 | Engenharia; proposta curta e exemplos |
 | Orçamento de tempo/memória e tamanho dos projetos | Antes de escolher stack e fixar metas; cargas de BENCHMARK.md são hipóteses calibráveis | Usuário + engenharia |
-| Licença de distribuição e registro do domínio pretendido | Antes do primeiro lançamento como open source e da ativação do site | Fundador/mantenedores |
+| Registro do domínio pretendido (licença decidida: MIT) | Antes da ativação do site | Fundador/mantenedores |
 | Matriz mínima de navegadores/webviews | Antes de declarar suporte; ampliações por evidência | Mantenedores + contribuidores |
 | Qual subconjunto merece verificação formal | M4, com base em falhas reais e custo de prova | Comunidade de linguagem/verificação |
 
