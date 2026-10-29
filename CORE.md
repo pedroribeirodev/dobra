@@ -62,6 +62,19 @@ Contrato canônico do M0. SPEC.md e CONTEXT.md apontam para esta seção em vez 
 
 As seções 1–9 são direção do núcleo futuro e registram pontos de extensão. Não são critérios de entrega do M0 nem motivo para bloquear seu primeiro transpiler.
 
+### 0.2 Direção de produto e caminho para editores
+
+Decisão de 28/10/2026: CRM/ERP é o primeiro cenário de validação de webapps. Dobra continua sendo uma linguagem geral de UI, com um caminho de evolução para editores visuais com interação contínua. Esse requisito não declara suporte ou desempenho equivalentes aos de um editor existente.
+
+- O M0 mantém a saída JavaScript ES modules + CSS com operações DOM. Reatividade granular é a direção de M1: atualizar os consumidores de um estado preservando identidade, foco e ciclo de vida. Seus ganhos dependem de testes e medições.
+- Componentes são definidos pelo autor. Tabelas, formulários e fluxos de CRUD pertencem a bibliotecas; não delimitam a linguagem.
+- O modelo de estado e as regras de domínio futuros devem ser independentes dos nós DOM. Uma seleção poderá alimentar um painel HTML e uma superfície gráfica por adaptadores explícitos. Recursos de renderização ficam sob responsabilidade do adaptador.
+- Uma região externa tem proprietário e ciclo de vida definidos. Dobra não modifica os descendentes ou recursos controlados pelo adaptador; o descarte da região libera os listeners, tarefas e recursos que ela criou. O contrato deve permitir notificar alterações e limpar a integração.
+- Parser e validação ficam separados da emissão DOM. Preservar essa separação não exige construir uma representação universal de renderização no M0.
+- A integração prevista em M2 pode hospedar uma superfície canvas com motor gráfico próprio, mantendo menus e formulários em HTML. Canvas, WebGL/WebGPU, Workers e Wasm serão escolhidos por necessidade e ambiente; não são dependências obrigatórias. Componentes HTML/CSS não são automaticamente convertíveis em desenhos canvas.
+
+O teste de evolução em [SPEC.md §5](SPEC.md#5-evolução-incremental) deverá exercitar seleção compartilhada entre canvas e painel DOM, atualizações em ambas as direções e descarte independente. Essa verificação pertence a M2, após o estado e os eventos de M1, e não amplia o escopo do M0.
+
 ## 1. Abrangência e unidade de composição
 
 - A unidade básica é um componente definido pelo autor, com entradas tipadas, saídas/eventos e composição de filhos. Não há catálogo obrigatório de componentes visuais.

@@ -10,6 +10,8 @@ Documentação: [especificação](https://github.com/pedroribeirodev/dobra/blob/
 
 Dobra será uma linguagem geral de UI, destinada à autoria e manutenção por pessoas e agentes. A abrangência desejada é comparável à do React na plataforma web: componentes isolados, sites simples, aplicações complexas e interfaces dentro de webviews. Essa abrangência é uma direção de arquitetura, não uma afirmação sobre recursos disponíveis hoje.
 
+O primeiro cenário de validação de webapps será CRM/ERP. A evolução para editores visuais deve permanecer possível: componentes livres, estado de domínio separado dos nós DOM e regiões externas com proprietário e descarte explícitos. M0 mantém JavaScript + DOM; M1 segue a direção de reatividade granular; M2 inclui um teste de canvas conectado a um painel HTML. WebGL/WebGPU, Workers e Wasm são opções futuras por integração, sem obrigação de adotá-las agora. Contrato em [CORE.md §0.2](CORE.md#02-direção-de-produto-e-caminho-para-editores).
+
 Dois objetivos têm **o mesmo peso**:
 
 1. Reduzir o custo total para LLMs criarem e modificarem interfaces, incluindo instruções, contexto, correções e falhas.
@@ -58,7 +60,7 @@ A aceitação exige componentes aninhados, instâncias independentes, erros prev
 ## Evolução planejada
 
 - **M1 — interatividade:** estado, derivações, eventos, listas com chaves, limpeza de efeitos e estilos locais.
-- **M2 — ambientes e integrações:** adaptadores JS/TS, políticas assíncronas, saída estática quando possível e webview real.
+- **M2 — ambientes e integrações:** adaptadores JS/TS, políticas assíncronas, saída estática quando possível, teste de canvas com seleção compartilhada com um painel DOM e webview real.
 - **M3 — ferramentas para agentes:** comparação de sintaxes, edição estruturada e diagnósticos orientados a reparo.
 - **M4 — contratos verificáveis:** propriedades delimitadas de estados e ações, com hipóteses e método de verificação declarados.
 

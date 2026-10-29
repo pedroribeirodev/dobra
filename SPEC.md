@@ -6,6 +6,8 @@
 
 Criar uma linguagem de UI de propósito geral, destinada à autoria e manutenção por pessoas e agentes. A abrangência pretendida inclui componentes isolados, sites simples, aplicações complexas e interfaces em webviews. Eficiência para LLMs e desempenho no navegador têm o mesmo peso.
 
+CRM/ERP é o primeiro cenário de validação de webapps. A arquitetura deve preservar a evolução para editores visuais com áreas gráficas e interação contínua, por meio de componentes livres, estado separado da renderização e integrações com ciclo de vida explícito. A direção está registrada em [CORE.md §0.2](CORE.md#02-direção-de-produto-e-caminho-para-editores); ela não adiciona um motor gráfico nem interatividade ao M0.
+
 A direção é desenvolver o projeto como open source e envolver a comunidade. A primeira entrega será um transpiler pequeno e executável; os recursos da linguagem e as garantias crescerão por etapas. O nome definido é **Dobra**, a extensão de arquivo é `.dobra` e a CLI planejada é `dobra`. O repositório deste projeto é `pedroribeirodev/dobra`. A licença é MIT ([LICENSE](LICENSE)). O domínio pretendido é `dobra.build`; sua disponibilidade foi informada pelo fundador, mas a compra ainda não foi confirmada. Nenhum transpiler foi implementado e nenhum ganho foi medido.
 
 Documentos complementares:
@@ -103,11 +105,20 @@ M0 não inclui estado reativo, handlers de eventos da linguagem, operações ass
 | --- | --- | --- |
 | M0 — tradução | Parser, validação, emissão DOM/CSS, montagem/descarte e diagnósticos | Corpus e fixture de navegador aprovados. |
 | M1 — interatividade | Estado local, derivações, eventos, listas com chaves, limpeza de efeitos e semântica de estilos locais | Atualizações preservam identidade; remover componentes libera recursos; cenários de foco e clique passam. |
-| M2 — ambientes e integrações | Adaptadores JS/TS, políticas assíncronas, saída estática onde possível e integração com webview real | Fixtures de site, aplicação e host embarcado passam; fronteiras e versões suportadas estão publicadas. |
+| M2 — ambientes e integrações | Adaptadores JS/TS, políticas assíncronas, saída estática onde possível, superfície gráfica externa e integração com webview real | Fixtures de site, aplicação, canvas integrado e host embarcado passam; fronteiras e versões suportadas estão publicadas. |
 | M3 — otimização para agentes | Comparação de sintaxes, operações estruturadas de edição e diagnósticos orientados a reparo | Menor custo total demonstrado sem perda de qualidade; mudanças incompatíveis têm migração. |
 | M4 — contratos verificáveis | Propriedades específicas de estados e ações, com método e fronteiras declarados | Casos positivos e contraexemplos demonstram cada garantia; tradução/runtime entram no argumento de confiança. |
 
 As medições começam em M0 como instrumentação. Ensaios comparativos podem ocorrer a cada marco com tarefas já suportadas. O estudo completo das três fixtures depende da cobertura de M2. Provas formais gerais, renderers nativos sem webview e um ecossistema completo de roteamento/pacotes não condicionam o primeiro transpiler.
+
+O teste de integração gráfica de M2 é uma verificação adicional de arquitetura, sem substituir as três fixtures comparativas de BENCHMARK.md:
+
+1. Montar uma área canvas com objetos selecionáveis dentro de um painel DOM em Dobra.
+2. Selecionar um objeto no canvas e exibir suas propriedades no formulário lateral; alterar uma propriedade no formulário e atualizar o mesmo objeto, preservando sua identidade.
+3. Desmontar a área gráfica e manter o restante do painel e outras montagens funcionais.
+4. Verificar que listeners, callbacks agendados e recursos da área descartada foram liberados; declarar o motor e as versões realmente testados.
+
+Esse teste demonstra interoperabilidade e propriedade dos recursos. Capacidade para milhares de objetos, latência de interação, acessibilidade da superfície gráfica e colaboração em tempo real exigirão requisitos e avaliações próprios antes de qualquer promessa de suporte a editores completos.
 
 ## 6. Decisões de arquitetura e alternativas
 

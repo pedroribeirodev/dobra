@@ -12,6 +12,7 @@
 
 - Priorize o transpiler M0: componentes próprios, props escalares, composição estática, emissão DOM/CSS, montagem e descarte.
 - Preserve a abrangência futura: sites, aplicações e webviews; não transformar a linguagem em um catálogo obrigatório de componentes.
+- CRM/ERP é o primeiro cenário de validação; preserve o caminho para editores visuais conforme CORE.md §0.2. Mantenha análise separada de emissão, estado de domínio independente dos nós DOM e propriedade explícita de regiões externas. O teste canvas/painel pertence a M2, sem ampliar M0.
 - Não ampliar M0 com estado reativo, efeitos, async, SSR ou provas sem registrar a mudança de escopo.
 - Questione escolhas de arquitetura e confirme requisitos de escala/distribuição antes de escolher a stack do compilador.
 - Mantenha fonte, especificação e corpus de conformidade alinhados. Registre decisões que mudem comportamento observável.
