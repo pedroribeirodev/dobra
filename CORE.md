@@ -17,6 +17,49 @@ Data: 28/10/2026. Documento de decisões propostas; não descreve uma linguagem 
 - A mesma fixture pode servir de smoke test em webview, mas não declara compatibilidade universal sem uma matriz de motores/versões realmente executada.
 - Para colaboração: mini-especificação desse subconjunto, exemplos, diagnósticos e corpus de conformidade versionados junto ao compilador. Novas propostas entram com semântica e fixtures, antes de acrescentar features.
 
+### 0.1 Decisões fixadas para o M0
+
+Contrato canônico do M0. SPEC.md e CONTEXT.md apontam para esta seção em vez de repeti-la. As decisões valem para o M0 e podem mudar por proposta com corpus e migração.
+
+**Componentes e raiz**
+
+- Tag com inicial maiúscula é componente do mesmo módulo; tag minúscula é elemento HTML. Um nome que não segue essa regra gera diagnóstico.
+- Cada componente tem exatamente um nó raiz. Mais de uma raiz gera `E008`. Filhos/slots ficam fora do M0.
+
+**Texto, espaços e entidades**
+
+- Regra no estilo JSX: linhas formadas só por espaços são descartadas; sequências internas de espaços, tabulações e quebras de linha viram um único espaço.
+- Entidades aceitas: `&lt;`, `&gt;`, `&amp;`, `&lbrace;` e `&rbrace;`. Outras entidades geram diagnóstico.
+- Um `number` vira texto com `String(n)`. `NaN` e `Infinity` (positivo ou negativo) são rejeitados na montagem.
+
+**Elementos, atributos e propriedades**
+
+- O M0 aceita uma lista fechada de tags e atributos HTML, publicada junto ao corpus. O que estiver fora da lista gera `E006`.
+- `value`, `checked`, `disabled` e `selected` são atribuídos como propriedades DOM; os demais atributos usam `setAttribute`.
+- Atributos booleanos do HTML seguem presença: `false` remove o atributo. `aria-*` e `data-*` recebem os textos `"true"` ou `"false"`.
+
+**Segurança**
+
+- Atributos `on*` são rejeitados.
+- URLs aceitam apenas `http:`, `https:`, `mailto:`, `tel:`, fragmento (`#...`) e caminhos relativos. Literais são verificados na compilação; valores vindos de props, na montagem.
+
+**API exportada**
+
+- Cada componente exporta `mountX(root, props)`, em que `X` é o nome do componente, e a chamada devolve `dispose`.
+- As props são validadas antes de criar qualquer nó. Uma prop inválida lança `DobraPropError` sem anexar nada à raiz.
+- A montagem insere seu nó no fim de `root`. `dispose` remove apenas esse nó e é idempotente.
+- Prop ausente em uso interno é diagnóstico de compilação (`E003`); valor inválido vindo de JavaScript é `DobraPropError` na montagem.
+
+**Diagnósticos e build**
+
+- Os códigos `E001`–`E008` estão registrados em [DIAGNOSTICS.md](DIAGNOSTICS.md), com status. Um código publicado não é reutilizado com outro significado.
+- O build é determinístico: a entrada é normalizada para LF antes da análise, e diagnósticos e artefatos usam caminhos relativos à raiz do projeto.
+
+**Implementação**
+
+- Compilador em TypeScript, com parser recursivo descendente escrito à mão e AST com intervalos de origem (offset, linha e coluna).
+- O corpus de conformidade é formado por pares `.dobra` + `.expected.json`, independentes da implementação, para sobreviver a uma troca futura de stack.
+
 As seções 1–9 são direção do núcleo futuro e registram pontos de extensão. Não são critérios de entrega do M0 nem motivo para bloquear seu primeiro transpiler.
 
 ## 1. Abrangência e unidade de composição
@@ -24,7 +67,7 @@ As seções 1–9 são direção do núcleo futuro e registram pontos de extens�
 - A unidade básica é um componente definido pelo autor, com entradas tipadas, saídas/eventos e composição de filhos. Não há catálogo obrigatório de componentes visuais.
 - Elementos HTML, SVG e capacidades do ambiente devem ser acessíveis. Canvas, bibliotecas externas e recursos específicos de webviews entram por integrações explícitas, sem exigir uma nova primitiva de linguagem para cada biblioteca.
 - O núcleo descreve estrutura, estado e comportamento. Roteamento, design systems, formulários e acesso a dados são bibliotecas sobre esse núcleo; nenhuma delas deve ser condição para montar um componente.
-- O mesmo componente pode ser montado em parte de uma página existente ou compor uma aplicação inteira. A integração recebe um elemento raiz e devolve um identificador para atualização e descarte.
+- O mesmo componente pode ser montado em parte de uma página existente ou compor uma aplicação inteira. A integração recebe um elemento raiz e devolve um identificador para descarte; no M0 esse identificador é a função `dispose` (§0.1). Atualização pelo identificador é posterior ao M0.
 - “Universal” significa uma base comum com capacidades declaradas por ambiente. Não significa que uma API nativa exista em todos os motores ou que toda biblioteca web funcione em qualquer webview.
 
 ## 2. Identidade e ciclo de vida

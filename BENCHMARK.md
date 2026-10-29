@@ -117,3 +117,13 @@
 - **Falsificação:** ganho desaparece ao incluir guia/reparos; taxa de falha cresce; patches acumulam regressões; runtime/bytes/memória pioram além da margem; ou interoperabilidade/host real quebra o contrato.
 - **Inconclusivo:** intervalos incluem ausência de ganho relevante ou ambiente necessário não foi avaliado; não reinterpretar como aprovação.
 - Preservar dados brutos, versões, prompts não sensíveis, configurações, logs de falha e scripts de medição para reprodução futura.
+
+## 8. Piloto antecipado de custo para agentes no subconjunto M0
+
+Objetivo: testar cedo se a sintaxe de Dobra reduz custo para agentes, antes de investir em M1. É um piloto exploratório (§7); não sustenta alegação de superioridade.
+
+- **Candidatos:** Dobra; TSX; HTML com template literal em JavaScript; e TSX compilado pelo mesmo emissor DOM de Dobra. Esse último isola o efeito da sintaxe do efeito do compilador.
+- **Tarefas:** criação e alteração de componentes estáticos com props escalares e composição, dentro do que o M0 suporta.
+- **Custo do guia:** contar os tokens do guia de Dobra em todo cenário frio, como em §4.
+- **Reparo:** injetar erros conhecidos e contar tokens e tentativas até o agente corrigir usando apenas o diagnóstico. Registrar sucesso, reparos e falhas dentro do orçamento.
+- **Critério de parada:** se o custo total de Dobra não for menor que o de TSX, nem no ensaio de reparo, revisar a tese antes de iniciar M1. Margens e orçamento seguem §7 e são registrados antes da execução.

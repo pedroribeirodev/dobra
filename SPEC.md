@@ -12,6 +12,7 @@ Documentos complementares:
 
 - [CORE.md](CORE.md): contrato do primeiro transpiler e direção semântica dos recursos futuros.
 - [BENCHMARK.md](BENCHMARK.md): avaliação de correção, tokens, manutenção e desempenho.
+- [DIAGNOSTICS.md](DIAGNOSTICS.md): registro dos códigos de diagnóstico.
 - [CONTRIBUTING.md](CONTRIBUTING.md): proposta de contribuição, primeiras tarefas e convite em rascunho.
 
 ## 2. Problema e hipótese
@@ -47,6 +48,8 @@ Source → Parser → AST → Semantic validation → DOM code generation
 ```
 
 ### Entrada e saída
+
+As decisões fixadas de gramática, atributos, segurança, API e diagnósticos estão em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0), que é a fonte canônica do contrato M0.
 
 - Extensão definida: `.dobra`. A sintaxe pública permanece experimental.
 - Um módulo contém componentes nomeados, composição estática e props escalares obrigatórias: `string`, `number` e `boolean`.
@@ -121,8 +124,8 @@ As medições começam em M0 como instrumentação. Ensaios comparativos podem o
 
 | Questão | Quando resolver | Responsabilidade |
 | --- | --- | --- |
-| Linguagem de implementação do compilador, parser e empacotamento | Início de M0, após confirmar requisitos de distribuição e escala de compilação | Engenharia + usuário |
-| Gramática exata, espaços/texto, mapeamento de atributos e API de exportação | Antes de escrever o corpus M0 | Engenharia; proposta curta e exemplos |
+| Linguagem de implementação do compilador e parser | Decidido: TypeScript, parser recursivo descendente escrito à mão ([CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0)); empacotamento segue aberto | Engenharia + usuário |
+| Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0); gramática formal completa entra com o T01 | Engenharia; proposta curta e exemplos |
 | Orçamento de tempo/memória e tamanho dos projetos | Antes de escolher stack e fixar metas; cargas de BENCHMARK.md são hipóteses calibráveis | Usuário + engenharia |
 | Licença de distribuição e registro do domínio pretendido | Antes do primeiro lançamento como open source e da ativação do site | Fundador/mantenedores |
 | Matriz mínima de navegadores/webviews | Antes de declarar suporte; ampliações por evidência | Mantenedores + contribuidores |
