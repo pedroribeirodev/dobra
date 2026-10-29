@@ -15,7 +15,7 @@
 
 | Tarefa | Entrega | Depende de |
 | --- | --- | --- |
-| T01 — mini-gramática M0 | Tokens, estrutura de componentes, texto/espaços, props, expressões, exemplos válidos e inválidos | Contrato M0 |
+| T01 — mini-gramática M0 | Contrato experimental em [GRAMMAR.md](GRAMMAR.md): tokens, componentes, texto/espaços, props, expressões e exemplos válidos/inválidos | Contrato M0 |
 | T02 — corpus e harness | Casos de conformidade e projeto mínimo de navegador que consome a saída | T01 |
 | T03 — parser e AST | Nós com intervalos de origem e diagnósticos de sintaxe | T01 |
 | T04 — validação semântica | Referências, tipos escalares, props obrigatórias, componentes e rejeição de ciclos | T03 |
@@ -23,7 +23,7 @@
 | T06 — revisão no navegador | Evidência de texto/atributos, duas montagens independentes, descarte, teclado, cliques e CSS | T05 |
 | T07 — reprodução por terceiro | Instruções e comandos realmente executados em ambiente limpo | T06 |
 
-T02 e T03 podem avançar em paralelo depois de T01. Cada PR deve ter escopo definido e informar qual comportamento muda, como foi verificado e quais limitações permanecem. Não se exige uma nova prova formal para contribuir ao M0.
+T01 está documentada; T02 e T03 são as próximas entregas e podem avançar em paralelo a partir desse contrato. A gramática não substitui o corpus executável nem significa que o parser existe. Cada PR deve ter escopo definido e informar qual comportamento muda, como foi verificado e quais limitações permanecem. Não se exige uma nova prova formal para contribuir ao M0.
 
 ## Relatos de bugs e propostas
 

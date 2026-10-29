@@ -10,7 +10,9 @@ Códigos estáveis do compilador. Um código publicado não muda de significado;
 | E004 | erro | Referência inexistente | ativo |
 | E005 | erro | Ciclo de composição, direto ou indireto, com o caminho do ciclo | ativo |
 | E006 | erro | Recurso fora do subconjunto M0: expressão não suportada, tag ou atributo fora da lista, `on*`, URL com esquema não permitido | ativo |
-| E007 | erro | Tipo incompatível em uso estático de prop | ativo |
+| E007 | erro | Tipo incompatível em uso estático de prop ou atributo | ativo |
 | E008 | erro | Componente com mais de um nó raiz | ativo |
 
 Erros de execução na montagem (`DobraPropError`) não são diagnósticos de compilação e não usam esta numeração.
+
+[GRAMMAR.md](GRAMMAR.md) detalha a distinção entre sintaxe inválida (`E001`) e recurso fora do subconjunto (`E006`), e apresenta pares válidos/inválidos para todos os códigos. `E007` inclui os tipos de atributos/propriedades DOM definidos na gramática, além das props de componentes. O parser T03 não substitui a validação semântica T04.
