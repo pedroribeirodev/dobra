@@ -1,6 +1,6 @@
 # Dobra — núcleo semântico
 
-Data: 28/10/2026. Documento de decisões propostas; não descreve uma linguagem implementada nem resultados medidos. Nome definido: Dobra; arquivos `.dobra` e CLI planejada `dobra`. Sintaxe e implementação do compilador permanecem abertas. Leia [SPEC.md](SPEC.md) para os requisitos e a ordem dos marcos. Direção confirmada: open source, comunidade e evolução incremental começando pelo transpiler.
+Data: 28/10/2026. Documento de decisões; não descreve uma linguagem implementada nem resultados medidos. Nome definido: Dobra; arquivos `.dobra` e CLI planejada `dobra`. A sintaxe experimental está em [GRAMMAR.md](GRAMMAR.md); a implementação do compilador permanece pendente. Leia [SPEC.md](SPEC.md) para os requisitos e a ordem dos marcos. Direção confirmada: open source, comunidade e evolução incremental começando pelo transpiler.
 
 ## 0. M0: primeiro transpiler executável
 
@@ -19,7 +19,7 @@ Data: 28/10/2026. Documento de decisões propostas; não descreve uma linguagem 
 
 ### 0.1 Decisões fixadas para o M0
 
-Contrato canônico do M0. SPEC.md e CONTEXT.md apontam para esta seção em vez de repeti-la. As decisões valem para o M0 e podem mudar por proposta com corpus e migração.
+Contrato canônico do M0, detalhado pela [gramática experimental T01](GRAMMAR.md). SPEC.md e CONTEXT.md apontam para esta seção em vez de repeti-la. As decisões valem para o M0 e podem mudar por proposta com corpus e migração.
 
 **Componentes e raiz**
 
@@ -34,14 +34,16 @@ Contrato canônico do M0. SPEC.md e CONTEXT.md apontam para esta seção em vez 
 
 **Elementos, atributos e propriedades**
 
-- O M0 aceita uma lista fechada de tags e atributos HTML, publicada junto ao corpus. O que estiver fora da lista gera `E006`.
-- `value`, `checked`, `disabled` e `selected` são atribuídos como propriedades DOM; os demais atributos usam `setAttribute`.
+- O M0 aceita a lista fechada de tags e atributos HTML de [GRAMMAR.md §4](GRAMMAR.md#4-superfície-html-fechada), que guiará o corpus T02. O que estiver fora da lista gera `E006`.
+- `value`, `checked`, `disabled` e `selected` são atribuídos como propriedades DOM. `value` exige string nas tags suportadas; as outras três exigem boolean. Os demais atributos usam `setAttribute`, sujeitos às regras de presença abaixo.
 - Atributos booleanos do HTML seguem presença: `false` remove o atributo. `aria-*` e `data-*` recebem os textos `"true"` ou `"false"`.
+- Na inicialização, `checked`, `disabled` e `selected` sincronizam propriedade e presença do atributo. Interações, agrupamentos de controles e mudanças posteriores seguem o comportamento nativo do HTML; não há controle reativo no M0.
+- Propriedades são aplicadas após atributos e filhos. `select.value` tem precedência sobre a seleção inicial das opções; `textarea` não combina `value` com conteúdo. `input type="file"` fica fora do M0. Casos de normalização nativa e conflitos estão definidos em GRAMMAR.md.
 
 **Segurança**
 
 - Atributos `on*` são rejeitados.
-- URLs aceitam apenas `http:`, `https:`, `mailto:`, `tel:`, fragmento (`#...`) e caminhos relativos. Literais são verificados na compilação; valores vindos de props, na montagem.
+- URLs aceitam apenas `http:`, `https:`, `mailto:`, `tel:`, fragmento (`#...`) e caminhos relativos ao documento ou à raiz. Literais são verificados na compilação; valores vindos de props, na montagem. A checagem ocorre após decodificar a fonte e rejeita controles, barras invertidas e referências `//host`; o algoritmo está em GRAMMAR.md §4.
 
 **API exportada**
 

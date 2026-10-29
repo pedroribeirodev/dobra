@@ -3,10 +3,10 @@
 ## Estado atual
 
 - Repositório de desenho e planejamento. O transpiler M0 ainda não foi implementado.
-- Leia README.md, SPEC.md e CORE.md antes de propor implementação. Consulte o histórico Git para entender mudanças de decisão.
+- Leia README.md, SPEC.md, CORE.md e GRAMMAR.md antes de propor implementação. Consulte o histórico Git para entender mudanças de decisão.
 - Nome definido: Dobra; extensão `.dobra`; CLI planejada `dobra`.
 - Eficiência para LLM e desempenho no navegador têm o mesmo peso. Não anunciar ganhos sem evidência reproduzível.
-- Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; gramática formal completa e matriz de ambientes ainda precisam ser definidas.
+- Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; a gramática experimental T01 está em GRAMMAR.md. Corpus/harness (T02), parser (T03) e matriz de ambientes ainda precisam ser implementados ou definidos.
 
 ## Escopo e decisões
 

@@ -13,6 +13,7 @@ A direção é desenvolver o projeto como open source e envolver a comunidade. A
 Documentos complementares:
 
 - [CORE.md](CORE.md): contrato do primeiro transpiler e direção semântica dos recursos futuros.
+- [GRAMMAR.md](GRAMMAR.md): gramática experimental T01, superfície HTML fechada e exemplos por diagnóstico.
 - [BENCHMARK.md](BENCHMARK.md): avaliação de correção, tokens, manutenção e desempenho.
 - [DIAGNOSTICS.md](DIAGNOSTICS.md): registro dos códigos de diagnóstico.
 - [CONTRIBUTING.md](CONTRIBUTING.md): proposta de contribuição, primeiras tarefas e convite em rascunho.
@@ -56,11 +57,11 @@ As decisões fixadas de gramática, atributos, segurança, API e diagnósticos e
 - Extensão definida: `.dobra`. A sintaxe pública permanece experimental.
 - Um módulo contém componentes nomeados, composição estática e props escalares obrigatórias: `string`, `number` e `boolean`.
 - Expressões aceitas inicialmente: literais e referências a props. Chamadas, atribuições e JavaScript arbitrário ficam fora desse subconjunto e produzem diagnóstico.
-- A primeira gramática deve ser familiar, baseada em marcação semelhante a HTML, e publicada como experimental. O corpus de conformidade acompanha sua evolução.
+- A gramática experimental está publicada em [GRAMMAR.md](GRAMMAR.md), com marcação semelhante a HTML. O corpus de conformidade T02 deverá acompanhar sua evolução.
 - Componentes compostos no M0 podem estar no mesmo módulo. Resolução de pacotes e imports gerais pertencem às expansões.
 - A composição estática deve formar um grafo sem ciclos. Referência recursiva direta ou indireta entre componentes é erro de compilação, com o caminho do ciclo no diagnóstico.
 - CSS associado é global e explícito no M0. O compilador o preserva; não anuncia isolamento automático antes de implementar e verificar essa transformação.
-- Cada componente exporta uma operação de montagem que recebe raiz e props e devolve `dispose`. O nome exato das exportações será fixado com a gramática e a API do primeiro pacote.
+- Cada componente `X` exportará `mountX(root, props) => dispose`, conforme CORE.md §0.1. A função recebe raiz e props e devolve o descarte daquela montagem.
 - Props são capturadas na montagem. Não há API de atualização reativa no M0.
 - Diagnósticos têm código estável, severidade, mensagem, arquivo e intervalo de origem. A CLI deve distinguir compilação bem-sucedida de erro; erro não pode deixar uma nova saída parcial apresentada como válida.
 
@@ -136,7 +137,7 @@ Esse teste demonstra interoperabilidade e propriedade dos recursos. Capacidade p
 | Questão | Quando resolver | Responsabilidade |
 | --- | --- | --- |
 | Linguagem de implementação do compilador e parser | Decidido: TypeScript, parser recursivo descendente escrito à mão ([CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0)); empacotamento segue aberto | Engenharia + usuário |
-| Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0); gramática formal completa entra com o T01 | Engenharia; proposta curta e exemplos |
+| Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0) e detalhado em [GRAMMAR.md](GRAMMAR.md); implementação e corpus pendentes | Engenharia; manter contrato, exemplos e implementação alinhados |
 | Orçamento de tempo/memória e tamanho dos projetos | Antes de escolher stack e fixar metas; cargas de BENCHMARK.md são hipóteses calibráveis | Usuário + engenharia |
 | Registro do domínio pretendido (licença decidida: MIT) | Antes da ativação do site | Fundador/mantenedores |
 | Matriz mínima de navegadores/webviews | Antes de declarar suporte; ampliações por evidência | Mantenedores + contribuidores |

@@ -6,6 +6,8 @@ Dobra é uma linguagem de UI para pessoas e agentes de IA escreverem e manterem 
 
 > **Status: fase de especificação.** O transpiler ainda não existe. Não há pacote, instalação funcional nem benchmarks executados. Nenhum ganho de tokens ou de desempenho foi demonstrado. Sintaxe e APIs são experimentais.
 
+A primeira entrega de especificação, [gramática M0 (T01)](GRAMMAR.md), define tokens, componentes, texto, atributos e exemplos aceitos/rejeitados. Corpus e parser são as próximas entregas. CRM/ERP será o primeiro cenário de validação de webapps, preservando a evolução para editores visuais por integrações explícitas ([CORE.md §0.2](CORE.md#02-direção-de-produto-e-caminho-para-editores)).
+
 ## Exemplo (ilustrativo, transpiler ainda não existe)
 
 ```text
@@ -59,7 +61,7 @@ Detalhes em [SPEC.md §5](SPEC.md#5-evolução-incremental).
 
 Primeiras tarefas, na ordem de [CONTRIBUTING.md](CONTRIBUTING.md):
 
-1. **T01, mini-gramática M0:** tokens, texto/espaços, props, expressões e exemplos válidos e inválidos.
+1. **T01, mini-gramática M0:** contrato experimental em [GRAMMAR.md](GRAMMAR.md), com tokens, texto/espaços, props, expressões e exemplos válidos e inválidos.
 2. **T02, corpus e harness:** casos `.dobra` + `.expected.json` e um projeto mínimo de navegador que consome a saída.
 3. **T03, parser e AST:** parser recursivo descendente em TypeScript, com intervalos de origem e diagnósticos de sintaxe.
 4. **T06, revisão no navegador:** testes de comportamento para texto, atributos, montagens independentes, descarte, teclado e cliques.
@@ -72,6 +74,7 @@ Exemplos que quebram a tradução e resultados negativos também são contribui�
 | --- | --- |
 | [SPEC.md](SPEC.md) | Direção, requisitos do M0 e roadmap. |
 | [CORE.md](CORE.md) | Contrato canônico do M0 (§0.1) e semântica futura. |
+| [GRAMMAR.md](GRAMMAR.md) | Gramática experimental, superfície HTML e exemplos por diagnóstico (T01). |
 | [BENCHMARK.md](BENCHMARK.md) | Como avaliar custo para agentes e desempenho no cliente. |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Tarefas T01–T07 e processo de contribuição. |
 | [DIAGNOSTICS.md](DIAGNOSTICS.md) | Registro dos códigos de diagnóstico. |

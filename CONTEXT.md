@@ -47,7 +47,7 @@ O subconjunto inicial inclui:
 - Props escalares obrigatórias: `string`, `number` e `boolean`.
 - Expressões restritas a literais e referências a props; não executar JavaScript arbitrário para avaliá-las.
 - Composição sem ciclos: recursão direta ou indireta entre componentes produz diagnóstico com o caminho do ciclo.
-- Operações conceituais `mount` e `dispose`. A montagem recebe raiz e props; o formato exato das exportações ainda será definido.
+- API definida `mountX(root, props) => dispose` para cada componente `X`; sua implementação permanece pendente.
 - Props capturadas e validadas na montagem, antes de anexar novos nós. M0 não possui atualização reativa de props.
 - Propriedade explícita dos nós: cada montagem remove somente o que criou; `dispose` é idempotente e preserva nós anteriores e outras montagens.
 - Tratamento correto de texto, atributos booleanos e propriedades dos elementos suportados; texto de props não vira HTML executável.
@@ -78,6 +78,6 @@ Compararemos tarefas equivalentes de criação e alterações sucessivas. Contar
 
 ## Questões abertas e pedido ao Grok
 
-Já decididos em CORE.md §0.1: stack (TypeScript), parser, regras de espaços/texto, atributos, segurança de URLs, API de exportação e diagnósticos. Permanecem abertos: gramática formal completa, escala de compilação, empacotamento, e matriz de ambientes. Licença decidida: MIT. Os documentos `SPEC.md`, `CORE.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
+Já decididos em CORE.md §0.1: stack (TypeScript), estratégia do parser, regras de espaços/texto, atributos, segurança de URLs, API de exportação e diagnósticos. A gramática experimental T01 está em [GRAMMAR.md](GRAMMAR.md). Permanecem abertos: implementação, corpus, escala de compilação, empacotamento e matriz de ambientes. Licença decidida: MIT. Os documentos `SPEC.md`, `CORE.md`, `GRAMMAR.md`, `BENCHMARK.md` e `CONTRIBUTING.md` registram a proposta detalhada.
 
-**Pedido ao Grok:** faça uma crítica arquitetural independente. Identifique hipóteses frágeis, ambiguidades e riscos de manutenção. Proponha a menor gramática e o menor transpiler que satisfaçam M0, com exemplos válidos e inválidos e testes de comportamento. Compare alternativas de implementação, explicitando requisitos de escala antes de escolher stack. Preserve a composição livre e o escopo incremental. Separe decisões necessárias agora das futuras e indique como medir se uma linguagem nova se justifica. Não presuma recursos implementados, benchmark favorável, domínio comprado ou licença definida.
+**Pedido ao Grok:** faça uma crítica arquitetural independente. Identifique hipóteses frágeis, ambiguidades e riscos de manutenção na gramática T01 e no desenho do transpiler, com exemplos válidos e inválidos e testes de comportamento. Compare alternativas de implementação, explicitando requisitos de escala antes de recomendar mudanças de stack. Preserve a composição livre e o escopo incremental. Separe decisões necessárias agora das futuras e indique como medir se uma linguagem nova se justifica. Não presuma recursos implementados, benchmark favorável ou domínio comprado.
