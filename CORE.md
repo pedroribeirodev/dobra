@@ -1,6 +1,6 @@
 # Dobra — núcleo semântico
 
-Data: 28/10/2026. Documento de decisões propostas; não descreve uma linguagem implementada nem resultados medidos. Nome definido: Dobra; arquivos `.dobra` e CLI planejada `dobra`. Sintaxe e implementação do compilador permanecem abertas. Leia [SPEC.md](SPEC.md) para os requisitos e a ordem dos marcos. Direção confirmada: open source, comunidade e evolução incremental começando pelo transpiler.
+Data: 28/10/2026. Documento de decisões propostas; não descreve uma linguagem implementada nem resultados medidos. Nome definido: Dobra; arquivos `.dobra` e CLI planejada `dobra`. Stack, parser e regras do M0 estão fixados na §0.1; a gramática formal completa e as decisões posteriores ao M0 permanecem abertas. Leia [SPEC.md](SPEC.md) para os requisitos e a ordem dos marcos. Direção confirmada: open source, comunidade e evolução incremental começando pelo transpiler.
 
 ## 0. M0: primeiro transpiler executável
 
