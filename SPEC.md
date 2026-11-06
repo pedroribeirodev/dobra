@@ -6,11 +6,14 @@
 
 Criar uma linguagem de UI de propósito geral, destinada à autoria e manutenção por pessoas e agentes. A abrangência pretendida inclui componentes isolados, sites simples, aplicações complexas e interfaces em webviews. Eficiência para LLMs e desempenho no navegador têm o mesmo peso.
 
+CRM/ERP é o primeiro cenário de validação de webapps. A arquitetura deve preservar a evolução para editores visuais com áreas gráficas e interação contínua, por meio de componentes livres, estado separado da renderização e integrações com ciclo de vida explícito. A direção está registrada em [CORE.md §0.2](CORE.md#02-direção-de-produto-e-caminho-para-editores); ela não adiciona um motor gráfico nem interatividade ao M0.
+
 A direção é desenvolver o projeto como open source e envolver a comunidade. A primeira entrega será um transpiler pequeno e executável; os recursos da linguagem e as garantias crescerão por etapas. O nome definido é **Dobra**, a extensão de arquivo é `.dobra` e a CLI planejada é `dobra`. O repositório deste projeto é `pedroribeirodev/dobra`. A licença é MIT ([LICENSE](LICENSE)). O domínio pretendido é `dobra.build`; sua disponibilidade foi informada pelo fundador, mas a compra ainda não foi confirmada. Nenhum transpiler foi implementado e nenhum ganho foi medido.
 
 Documentos complementares:
 
 - [CORE.md](CORE.md): contrato do primeiro transpiler e direção semântica dos recursos futuros.
+- [GRAMMAR.md](GRAMMAR.md): gramática experimental T01, superfície HTML fechada e exemplos por diagnóstico.
 - [BENCHMARK.md](BENCHMARK.md): avaliação de correção, tokens, manutenção e desempenho.
 - [DIAGNOSTICS.md](DIAGNOSTICS.md): registro dos códigos de diagnóstico.
 - [CONTRIBUTING.md](CONTRIBUTING.md): proposta de contribuição, primeiras tarefas e convite em rascunho.
@@ -54,11 +57,11 @@ As decisões fixadas de gramática, atributos, segurança, API e diagnósticos e
 - Extensão definida: `.dobra`. A sintaxe pública permanece experimental.
 - Um módulo contém componentes nomeados, composição estática e props escalares obrigatórias: `string`, `number` e `boolean`.
 - Expressões aceitas inicialmente: literais e referências a props. Chamadas, atribuições e JavaScript arbitrário ficam fora desse subconjunto e produzem diagnóstico.
-- A primeira gramática deve ser familiar, baseada em marcação semelhante a HTML, e publicada como experimental. O corpus de conformidade acompanha sua evolução.
+- A gramática experimental está publicada em [GRAMMAR.md](GRAMMAR.md), com marcação semelhante a HTML. O corpus de conformidade T02 deverá acompanhar sua evolução.
 - Componentes compostos no M0 podem estar no mesmo módulo. Resolução de pacotes e imports gerais pertencem às expansões.
 - A composição estática deve formar um grafo sem ciclos. Referência recursiva direta ou indireta entre componentes é erro de compilação, com o caminho do ciclo no diagnóstico.
 - CSS associado é global e explícito no M0. O compilador o preserva; não anuncia isolamento automático antes de implementar e verificar essa transformação.
-- Cada componente exporta uma operação de montagem que recebe raiz e props e devolve `dispose`. O nome exato das exportações será fixado com a gramática e a API do primeiro pacote.
+- Cada componente `X` exportará `mountX(root, props) => dispose`, conforme CORE.md §0.1. A função recebe raiz e props e devolve o descarte daquela montagem.
 - Props são capturadas na montagem. Não há API de atualização reativa no M0.
 - Diagnósticos têm código estável, severidade, mensagem, arquivo e intervalo de origem. A CLI deve distinguir compilação bem-sucedida de erro; erro não pode deixar uma nova saída parcial apresentada como válida.
 
@@ -103,11 +106,20 @@ M0 não inclui estado reativo, handlers de eventos da linguagem, operações ass
 | --- | --- | --- |
 | M0 — tradução | Parser, validação, emissão DOM/CSS, montagem/descarte e diagnósticos | Corpus e fixture de navegador aprovados. |
 | M1 — interatividade | Estado local, derivações, eventos, listas com chaves, limpeza de efeitos e semântica de estilos locais | Atualizações preservam identidade; remover componentes libera recursos; cenários de foco e clique passam. |
-| M2 — ambientes e integrações | Adaptadores JS/TS, políticas assíncronas, saída estática onde possível e integração com webview real | Fixtures de site, aplicação e host embarcado passam; fronteiras e versões suportadas estão publicadas. |
+| M2 — ambientes e integrações | Adaptadores JS/TS, políticas assíncronas, saída estática onde possível, superfície gráfica externa e integração com webview real | Fixtures de site, aplicação, canvas integrado e host embarcado passam; fronteiras e versões suportadas estão publicadas. |
 | M3 — otimização para agentes | Comparação de sintaxes, operações estruturadas de edição e diagnósticos orientados a reparo | Menor custo total demonstrado sem perda de qualidade; mudanças incompatíveis têm migração. |
 | M4 — contratos verificáveis | Propriedades específicas de estados e ações, com método e fronteiras declarados | Casos positivos e contraexemplos demonstram cada garantia; tradução/runtime entram no argumento de confiança. |
 
 As medições começam em M0 como instrumentação. Ensaios comparativos podem ocorrer a cada marco com tarefas já suportadas. O estudo completo das três fixtures depende da cobertura de M2. Provas formais gerais, renderers nativos sem webview e um ecossistema completo de roteamento/pacotes não condicionam o primeiro transpiler.
+
+O teste de integração gráfica de M2 é uma verificação adicional de arquitetura, sem substituir as três fixtures comparativas de BENCHMARK.md:
+
+1. Montar uma área canvas com objetos selecionáveis dentro de um painel DOM em Dobra.
+2. Selecionar um objeto no canvas e exibir suas propriedades no formulário lateral; alterar uma propriedade no formulário e atualizar o mesmo objeto, preservando sua identidade.
+3. Desmontar a área gráfica e manter o restante do painel e outras montagens funcionais.
+4. Verificar que listeners, callbacks agendados e recursos da área descartada foram liberados; declarar o motor e as versões realmente testados.
+
+Esse teste demonstra interoperabilidade e propriedade dos recursos. Capacidade para milhares de objetos, latência de interação, acessibilidade da superfície gráfica e colaboração em tempo real exigirão requisitos e avaliações próprios antes de qualquer promessa de suporte a editores completos.
 
 ## 6. Decisões de arquitetura e alternativas
 
@@ -125,7 +137,7 @@ As medições começam em M0 como instrumentação. Ensaios comparativos podem o
 | Questão | Quando resolver | Responsabilidade |
 | --- | --- | --- |
 | Linguagem de implementação do compilador e parser | Decidido: TypeScript, parser recursivo descendente escrito à mão ([CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0)); empacotamento segue aberto | Engenharia + usuário |
-| Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0); gramática formal completa entra com o T01 | Engenharia; proposta curta e exemplos |
+| Espaços/texto, mapeamento de atributos e API de exportação | Decidido em [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0) e detalhado em [GRAMMAR.md](GRAMMAR.md); implementação e corpus pendentes | Engenharia; manter contrato, exemplos e implementação alinhados |
 | Orçamento de tempo/memória e tamanho dos projetos | Antes de escolher stack e fixar metas; cargas de BENCHMARK.md são hipóteses calibráveis | Usuário + engenharia |
 | Registro do domínio pretendido (licença decidida: MIT) | Antes da ativação do site | Fundador/mantenedores |
 | Matriz mínima de navegadores/webviews | Antes de declarar suporte; ampliações por evidência | Mantenedores + contribuidores |

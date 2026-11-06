@@ -3,15 +3,18 @@
 ## Estado atual
 
 - Repositório de desenho e planejamento. O transpiler M0 ainda não foi implementado.
-- Leia README.md, SPEC.md e CORE.md antes de propor implementação. Consulte o histórico Git para entender mudanças de decisão.
+- Leia README.md, SPEC.md, CORE.md e GRAMMAR.md antes de propor implementação. Consulte o histórico Git para entender mudanças de decisão.
 - Nome definido: Dobra; extensão `.dobra`; CLI planejada `dobra`.
 - Eficiência para LLM e desempenho no navegador têm o mesmo peso. Não anunciar ganhos sem evidência reproduzível.
-- Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; gramática formal completa e matriz de ambientes ainda precisam ser definidas.
+- Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; a gramática experimental T01 está em GRAMMAR.md. Corpus/harness (T02), parser (T03) e matriz de ambientes ainda precisam ser implementados ou definidos.
+- Próximos passos: T02 (issue #4) e T03 (issue #5) podem avançar em paralelo sobre GRAMMAR.md; T06 (issue #6) pode começar contra um módulo escrito à mão. Cada caso do corpus deve ter uma única falha (GRAMMAR.md §2).
+- Decisões em aberto: incluir tabelas na lista HTML do M0 (relevante para CRM/ERP), empacotamento, escala de compilação e matriz de navegadores/webviews.
 
 ## Escopo e decisões
 
 - Priorize o transpiler M0: componentes próprios, props escalares, composição estática, emissão DOM/CSS, montagem e descarte.
 - Preserve a abrangência futura: sites, aplicações e webviews; não transformar a linguagem em um catálogo obrigatório de componentes.
+- CRM/ERP é o primeiro cenário de validação; preserve o caminho para editores visuais conforme CORE.md §0.2. Mantenha análise separada de emissão, estado de domínio independente dos nós DOM e propriedade explícita de regiões externas. O teste canvas/painel pertence a M2, sem ampliar M0.
 - Não ampliar M0 com estado reativo, efeitos, async, SSR ou provas sem registrar a mudança de escopo.
 - Questione escolhas de arquitetura e confirme requisitos de escala/distribuição antes de escolher a stack do compilador.
 - Mantenha fonte, especificação e corpus de conformidade alinhados. Registre decisões que mudem comportamento observável.
