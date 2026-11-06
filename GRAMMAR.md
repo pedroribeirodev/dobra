@@ -97,7 +97,7 @@ O futuro lexer/parser poderá aceitar uma tag ou um nome de atributo com forma c
 | Aspas simples, template string, número hexadecimal, separador numérico, `+1` ou `.5` | `E006` |
 | Número que excede o intervalo finito, como `1e999` | `E006` |
 | `<input></input>`; filhos em `<Card>texto</Card>` | `E006` |
-| Entidade desconhecida, como `&nbsp;`, ou `&` isolado | `E006` |
+| Em texto: entidade desconhecida, como `&nbsp;`, ou `&` isolado | `E006` |
 | Segundo elemento na raiz após uma primeira raiz completa | `E008` |
 
 A detecção de um recurso fora do subconjunto não exige interpretá-lo. A mesma fonte normalizada, com o mesmo caminho relativo, deverá produzir a mesma AST ou diagnóstico, sem IDs aleatórios, timestamps ou variação na ordem de visita.
@@ -127,7 +127,7 @@ Como no JSX, um trecho em branco só é descartado quando contém uma quebra de 
 | `&lt;b&gt;&lbrace;x&rbrace;&lt;/b&gt;` | texto `"<b>{x}</b>"`, sem nova análise de marcação |
 | `&amp;lt;` | texto `"&lt;"`, sem segunda decodificação |
 
-O atributo literal `title="A &amp; B"` usa os escapes JSON e depois decodifica entidades uma vez. Não aplica a normalização de espaços de texto. Já expressões string, como `title={"A &amp; B"}` e `{"&lt;"}`, usam somente escapes JSON: os valores são respectivamente `"A &amp; B"` e `"&lt;"`. Uma prop recebida de JavaScript também não passa por decodificação de entidades.
+Entidades existem apenas no texto entre tags, onde `<`, `{` e `}` têm significado sintático. Toda string, seja atributo literal ou expressão, usa somente os escapes JSON e não decodifica entidades: `title="A & B"` e `title={"A & B"}` produzem o mesmo valor `"A & B"`, e `href="/busca?q=x&page=2"` é aceito sem escape. Consequentemente, `title="&lt;"` produz o texto `"&lt;"`, não `"<"`. Strings não aplicam a normalização de espaços de texto. Uma prop recebida de JavaScript também não passa por decodificação de entidades.
 
 Interpolação de string produz texto literal; `number` usa `String(n)` e `boolean` usa `"true"` ou `"false"`. Não há interpretação de string como HTML. Para espaços ou quebras de linha intencionais, uma expressão string como `{" "}` ou `{"\n"}` mantém o valor, sujeito à apresentação normal do CSS.
 
@@ -179,7 +179,7 @@ Em `textarea`, `value` e conteúdo não vazio são mutuamente exclusivos (`E006`
 
 ### URLs no M0
 
-A checagem opera sobre o valor final da string: escapes e entidades de atributos literais já terão sido decodificados; strings em expressões e props não ganham outra decodificação. O mesmo procedimento valerá na compilação para literais e na montagem para valores vindos de props. Ele rejeita valores; não os corrige, remove caracteres ou troca o destino.
+A checagem opera sobre o valor final da string: os escapes JSON de literais já terão sido decodificados; não há decodificação de entidades em strings nem nova decodificação de props. O mesmo procedimento valerá na compilação para literais e na montagem para valores vindos de props. Ele rejeita valores; não os corrige, remove caracteres ou troca o destino.
 
 1. Rejeitar controles `U+0000–U+001F` e `U+007F`, barra invertida em qualquer posição e espaço `U+0020` no início ou no fim.
 2. Reconhecer um esquema somente no início pela forma `[A-Za-z][A-Za-z0-9+.-]*:`. Comparar seu nome sem distinguir maiúsculas de minúsculas. Aceitar somente `http`, `https`, `mailto` e `tel`; rejeitar qualquer outro, incluindo `javascript` e `data`.
