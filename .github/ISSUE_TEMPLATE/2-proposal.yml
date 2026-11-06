@@ -1,0 +1,74 @@
+name: Proposta de sintaxe ou semântica / Syntax or semantics proposal
+description: Mudança no comportamento observável da linguagem. / A change to the language's observable behavior.
+labels: ["type: proposal", "status: needs-decision"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propostas seguem [CONTRIBUTING.md](https://github.com/pedroribeirodev/dobra/blob/main/CONTRIBUTING.md#governança-e-decisões). Ideias ainda vagas cabem melhor nas Discussions. Recursos de M1 em diante (estado, eventos, async, SSR) são bem-vindos como proposta, mas não entram no M0 sem uma mudança de escopo registrada.
+
+        Proposals follow [CONTRIBUTING.md](https://github.com/pedroribeirodev/dobra/blob/main/CONTRIBUTING.md#governança-e-decisões). Early ideas fit better in Discussions. Features from M1 onward (state, events, async, SSR) are welcome as proposals but do not enter M0 without a recorded scope change.
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Marco / Milestone
+      options: ["M0", "M1", "M2", "M3", "M4", "Não sei / Not sure"]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema / Problem
+      description: O que é difícil, ambíguo ou impossível hoje? / What is hard, ambiguous or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: example-create
+    attributes:
+      label: Exemplo de criação / Creation example
+      description: Código `.dobra` ilustrativo usando a proposta. / Illustrative `.dobra` code using the proposal.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: example-change
+    attributes:
+      label: Exemplo de alteração posterior / Later change example
+      description: Como o mesmo código seria modificado depois. / How the same code would be modified later.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Comportamento esperado e diagnósticos / Expected behavior and diagnostics
+      description: DOM resultante, erros e códigos `E00x` afetados. / Resulting DOM, errors and affected `E00x` codes.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas / Alternatives considered
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibilidade e migração / Compatibility and migration
+      description: O que quebra e como migrar exemplos e corpus. / What breaks and how to migrate examples and corpus.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Como verificar / How to verify
+      description: Casos de corpus e testes de comportamento no navegador. / Corpus cases and browser behavior tests.
+    validations:
+      required: true
+  - type: checkboxes
+    id: claims
+    attributes:
+      label: Alegações / Claims
+      options:
+        - label: Se a proposta alega ganho de tokens ou desempenho, o método segue BENCHMARK.md; contagem de caracteres não é evidência. / If the proposal claims token or performance gains, the method follows BENCHMARK.md; character counts are not evidence.
+          required: true

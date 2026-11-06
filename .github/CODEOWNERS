@@ -1,0 +1,17 @@
+# Revisão obrigatória de mantenedor / Required maintainer review.
+# Pede revisão automaticamente. Enquanto há um único mantenedor, o ruleset não exige aprovação;
+# ativar "require code owner review" quando houver outros contribuidores.
+# Requests review automatically. While there is a single maintainer the ruleset does not require
+# approval; enable "require code owner review" once there are other contributors.
+
+*                       @pedroribeirodev
+
+# Contrato da linguagem: mudanças exigem proposta, corpus e migração.
+# Language contract: changes require a proposal, corpus cases and migration notes.
+/CORE.md                @pedroribeirodev
+/GRAMMAR.md             @pedroribeirodev
+/SPEC.md                @pedroribeirodev
+/DIAGNOSTICS.md         @pedroribeirodev
+/BENCHMARK.md           @pedroribeirodev
+/LICENSE                @pedroribeirodev
+/.github/               @pedroribeirodev

@@ -76,7 +76,9 @@ Exemplos que quebram a tradução e resultados negativos também são contribui�
 | [CORE.md](CORE.md) | Contrato canônico do M0 (§0.1) e semântica futura. |
 | [GRAMMAR.md](GRAMMAR.md) | Gramática experimental, superfície HTML e exemplos por diagnóstico (T01). |
 | [BENCHMARK.md](BENCHMARK.md) | Como avaliar custo para agentes e desempenho no cliente. |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Tarefas T01–T07 e processo de contribuição. |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Tarefas T01–T07 e processo de contribuição, governança e resumo em inglês. |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Código de conduta (Contributor Covenant 2.1, pt-BR/en). |
+| [SECURITY.md](SECURITY.md) | Como relatar vulnerabilidades em privado. |
 | [DIAGNOSTICS.md](DIAGNOSTICS.md) | Registro dos códigos de diagnóstico. |
 | [CONTEXT.md](CONTEXT.md) | Contexto do projeto para conversar com agentes. |
 | [AGENTS.md](AGENTS.md) | Orientações para agentes neste repositório. |

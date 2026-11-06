@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ideias e perguntas / Ideas and questions
+    url: https://github.com/pedroribeirodev/dobra/discussions
+    about: Discussões abertas, dúvidas e ideias ainda sem proposta formal. / Open discussion, questions and ideas without a formal proposal yet.
+  - name: Vulnerabilidade de segurança / Security vulnerability
+    url: https://github.com/pedroribeirodev/dobra/security/advisories/new
+    about: Relate em privado; não abra issue pública. Veja SECURITY.md. / Report privately; do not open a public issue. See SECURITY.md.
