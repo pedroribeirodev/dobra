@@ -83,7 +83,7 @@ As seguintes restrições complementam a EBNF:
 
 O futuro lexer/parser poderá aceitar uma tag ou um nome de atributo com forma correta antes de T04 verificar a lista fechada. Não poderá avaliar expressões como JavaScript para tentar validá-las.
 
-`E001` identifica estrutura malformada: delimitador ausente, string não terminada, escape JSON inválido, atributo sem valor, dois atributos sem espaço entre eles, vírgula final, nome que viola a forma lexical ou `}` cru em texto. `E006` identifica um recurso reconhecível fora do subconjunto: uma expressão com operação/chamada, string com aspas simples, comentário, import, entidade não admitida, filhos de componente ou elemento vazio escrito com par de tags. A primeira falha encontrada determina o diagnóstico; exemplos com múltiplas falhas não prometem uma lista completa. `E008` se aplica quando aparece uma segunda raiz após uma primeira raiz completa.
+`E001` identifica estrutura malformada: delimitador ausente, string não terminada, escape JSON inválido, atributo sem valor, dois atributos sem espaço entre eles, vírgula final, nome que viola a forma lexical ou `}` cru em texto. `E006` identifica um recurso reconhecível fora do subconjunto: uma expressão com operação/chamada, string com aspas simples, comentário, import, entidade não admitida, filhos de componente ou elemento vazio escrito com par de tags. A ordem é determinística: falhas detectadas pelo parser (T03), incluindo `E008` e os `E006` sintáticos, vêm antes de qualquer diagnóstico da validação (T04); dentro de cada fase, vale a falha de menor offset inicial. Exemplos com múltiplas falhas não prometem uma lista completa, e cada caso do corpus T02 deve conter uma única falha, para que o código esperado não dependa da implementação. `E008` se aplica quando aparece uma segunda raiz após uma primeira raiz completa.
 
 | Caso isolado, no contexto correspondente | Diagnóstico previsto |
 | --- | --- |
@@ -92,7 +92,8 @@ O futuro lexer/parser poderá aceitar uma tag ou um nome de atributo com forma c
 | Prop declarada sem `:`; atributo sem `=` ou valor; atributos sem espaço entre eles | `E001` |
 | Vírgula final em `component Card(name: string,)` | `E001` |
 | Literal numérico malformado `01`, `1.` ou `1e` | `E001` |
-| BOM inicial, comentários (`//`, `/* ... */`, `<!-- ... -->`) ou `import` | `E006` |
+| Quebra de linha literal dentro de string, como um `class` longo dividido em várias linhas | `E001` |
+| BOM inicial; `import`, `//` ou `/* ... */` fora de um corpo de elemento; `<!-- ... -->` em qualquer posição | `E006` |
 | Tipo fora do M0, como `Date`, `string[]` ou `string?` | `E006` |
 | Aspas simples, template string, número hexadecimal, separador numérico, `+1` ou `.5` | `E006` |
 | Número que excede o intervalo finito, como `1e999` | `E006` |
@@ -100,7 +101,7 @@ O futuro lexer/parser poderá aceitar uma tag ou um nome de atributo com forma c
 | Em texto: entidade desconhecida, como `&nbsp;`, ou `&` isolado | `E006` |
 | Segundo elemento na raiz após uma primeira raiz completa | `E008` |
 
-A detecção de um recurso fora do subconjunto não exige interpretá-lo. A mesma fonte normalizada, com o mesmo caminho relativo, deverá produzir a mesma AST ou diagnóstico, sem IDs aleatórios, timestamps ou variação na ordem de visita.
+Dentro do texto entre tags, `//` e `/*` são caracteres comuns: `<p>https://example.com</p>` e `<p>a // b</p>` são texto válido. O parser reconhece `<!--` como comentário HTML e o rejeita com `E006`, em vez de `E001`. A detecção de um recurso fora do subconjunto não exige interpretá-lo. A mesma fonte normalizada, com o mesmo caminho relativo, deverá produzir a mesma AST ou diagnóstico, sem IDs aleatórios, timestamps ou variação na ordem de visita.
 
 ## 3. Texto, strings e entidades
 
@@ -341,7 +342,7 @@ Inválido, chamada de método:
 component Greeting(name: string) { <p>{name.trim()}</p> }
 ```
 
-Também são exemplos independentes inválidos: `<video />` (tag fora da lista), `<p style="color:red" />` (atributo fora da lista), `<button onclick="run()" />` (`on*`) e `<a href="javascript:alert(1)" />` (URL proibida), quando usados como raiz de um componente. Os exemplos com chamada e entidades não suportadas podem ser rejeitados pelo parser; as restrições HTML/URL pertencem a T04.
+Também são exemplos independentes inválidos: `<video />` (tag fora da lista), `<p style="color:red" />` (atributo fora da lista), `<button onclick="run()" />` (`on*`) e `<a href="javascript:alert(1)" />` (URL proibida), quando usados como raiz de um componente. Os exemplos com chamada e entidades não suportadas são rejeitados pelo parser; as restrições HTML/URL pertencem a T04.
 
 ### E007 — tipo incompatível
 
