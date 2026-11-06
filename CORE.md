@@ -28,7 +28,7 @@ Contrato canônico do M0, detalhado pela [gramática experimental T01](GRAMMAR.m
 
 **Texto, espaços e entidades**
 
-- Regra no estilo JSX: linhas formadas só por espaços são descartadas; sequências internas de espaços, tabulações e quebras de linha viram um único espaço.
+- Regra no estilo JSX: trechos em branco que contêm quebra de linha são descartados; um espaço na mesma linha, como em `{first} {last}`, é preservado. Sequências internas de espaços, tabulações e quebras de linha viram um único espaço. Algoritmo em [GRAMMAR.md §3](GRAMMAR.md#3-texto-strings-e-entidades).
 - Entidades aceitas: `&lt;`, `&gt;`, `&amp;`, `&lbrace;` e `&rbrace;`. Outras entidades geram diagnóstico.
 - Um `number` vira texto com `String(n)`. `NaN` e `Infinity` (positivo ou negativo) são rejeitados na montagem.
 

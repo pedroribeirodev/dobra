@@ -107,12 +107,12 @@ A detecção de um recurso fora do subconjunto não exige interpretá-lo. A mesm
 Texto entre tags segue um algoritmo por trecho contíguo, separado por elementos e interpolações:
 
 1. Dividir o trecho em linhas por `LF`.
-2. Descartar linhas compostas apenas de espaços e tabulações.
-3. Em cada linha restante, converter sequências de espaços/tabulações em um único espaço. Remover espaços no início das linhas posteriores à primeira linha original e no fim das linhas anteriores à última linha original.
+2. Em cada linha, converter sequências de espaços/tabulações em um único espaço. Remover o espaço no início das linhas posteriores à primeira e no fim das linhas anteriores à última.
+3. Descartar as linhas que ficaram vazias.
 4. Juntar as linhas restantes com um espaço.
 5. Decodificar as cinco entidades da tabela uma única vez. Entidade desconhecida ou `&` sem entidade válida gera `E006`.
 
-Essa ordem preserva um espaço literal ao lado de uma interpolação na mesma linha. Não insere espaços entre trechos separados por nós. Um trecho descartado não produz nó de texto. A normalização não considera o CSS: `white-space: pre` não recupera indentação removida da fonte.
+Como no JSX, um trecho em branco só é descartado quando contém uma quebra de linha; um espaço na mesma linha, inclusive entre duas interpolações ou dois elementos, vira um nó de texto `" "`. Diferente do JSX, sequências internas de espaços também são reduzidas a um, para que o DOM gerado não dependa da indentação. Não insere espaços entre trechos separados por nós. Um trecho descartado não produz nó de texto. A normalização não considera o CSS: `white-space: pre` não recupera indentação removida da fonte.
 
 | Fonte no corpo de um elemento | Valor de texto ou sequência de nós |
 | --- | --- |
@@ -121,7 +121,9 @@ Essa ordem preserva um espaço literal ao lado de uma interpolação na mesma li
 | `A` + quebra de linha + `  B` | texto `"A B"` |
 | quebra de linha + `  A` + quebra de linha | texto `"A"` |
 | `<span>A</span><span>B</span>` | dois elementos; nenhum espaço inserido entre eles |
-| `{first} {last}` | duas interpolações; o trecho composto só de espaço é descartado; use `{first}{" "}{last}` para separá-las |
+| `<span>A</span> <span>B</span>` | dois elementos separados pelo texto `" "` |
+| `{first} {last}` | interpolação `first`, texto `" "`, interpolação `last` |
+| `{first}` + quebra de linha + `  {last}` | duas interpolações; o trecho em branco com quebra de linha é descartado; use `{" "}` para separá-las |
 | `&lt;b&gt;&lbrace;x&rbrace;&lt;/b&gt;` | texto `"<b>{x}</b>"`, sem nova análise de marcação |
 | `&amp;lt;` | texto `"&lt;"`, sem segunda decodificação |
 
