@@ -7,6 +7,8 @@
 - Nome definido: Dobra; extensão `.dobra`; CLI planejada `dobra`.
 - Eficiência para LLM e desempenho no navegador têm o mesmo peso. Não anunciar ganhos sem evidência reproduzível.
 - Licença definida: MIT. Stack e regras do M0 estão em CORE.md §0.1; a gramática experimental T01 está em GRAMMAR.md. Corpus/harness (T02), parser (T03) e matriz de ambientes ainda precisam ser implementados ou definidos.
+- Próximos passos: T02 (issue #4) e T03 (issue #5) podem avançar em paralelo sobre GRAMMAR.md; T06 (issue #6) pode começar contra um módulo escrito à mão. Cada caso do corpus deve ter uma única falha (GRAMMAR.md §2).
+- Decisões em aberto: incluir tabelas na lista HTML do M0 (relevante para CRM/ERP), empacotamento, escala de compilação e matriz de navegadores/webviews.
 
 ## Escopo e decisões
 
