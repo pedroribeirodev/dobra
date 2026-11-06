@@ -41,7 +41,7 @@ Uma proposta de otimização deve preservar o contrato funcional e visual e segu
 - **Fonte da verdade:** CORE.md §0.1 e GRAMMAR.md definem o contrato do M0. Issues, discussões, comentários e mensagens de chat não mudam o contrato até que um PR atualize esses documentos.
 - **Fluxo de uma proposta:** ideias começam nas Discussions. Uma proposta formal usa o template de issue e recebe `status: needs-decision`. O mantenedor marca `status: accepted` ou `status: declined` com justificativa. Só depois de aceita, um PR altera o contrato, junto com os casos de corpus e uma nota de migração.
 - **Escopo:** recursos de marcos futuros recebem `out-of-scope: M0` e ficam abertos para reavaliação, sem implementação antes do marco.
-- **Merge:** a `main` aceita mudanças só por PR. PRs de terceiros precisam de aprovação do code owner ([.github/CODEOWNERS](.github/CODEOWNERS)) e de todas as conversas resolvidas.
+- **Merge:** a `main` aceita mudanças só por PR, com a CI passando e todas as conversas resolvidas. O [CODEOWNERS](.github/CODEOWNERS) pede a revisão do mantenedor automaticamente. Enquanto houver um único mantenedor, a aprovação não é obrigatória; ela passa a ser quando o projeto tiver contribuidores regulares.
 
 ## Contribuições com ferramentas de IA
 

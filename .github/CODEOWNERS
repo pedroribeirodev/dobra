@@ -1,6 +1,8 @@
 # Revisão obrigatória de mantenedor / Required maintainer review.
-# O ruleset da main exige aprovação de code owner em PRs de terceiros.
-# The main branch ruleset requires code owner approval on external PRs.
+# Pede revisão automaticamente. Enquanto há um único mantenedor, o ruleset não exige aprovação;
+# ativar "require code owner review" quando houver outros contribuidores.
+# Requests review automatically. While there is a single maintainer the ruleset does not require
+# approval; enable "require code owner review" once there are other contributors.
 
 *                       @pedroribeirodev
 
