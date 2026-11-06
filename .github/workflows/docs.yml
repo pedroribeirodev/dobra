@@ -1,0 +1,36 @@
+name: docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: docs checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Espaços em branco / Whitespace (git diff --check)
+        # Compara a árvore inteira com a árvore vazia. / Compares the whole tree with the empty tree.
+        run: git diff --check 4b825dc642cb6eb9a060e54bf8d69288fbee4904 HEAD
+
+      - name: Links, âncoras e aviso de status / Links, anchors and status banner
+        run: python3 -I scripts/check_docs.py .
+
+      - name: YAML dos templates / Template YAML
+        run: |
+          shopt -s nullglob
+          files=(.github/ISSUE_TEMPLATE/*.yml .github/workflows/*.yml)
+          ruby -ryaml -e 'ARGV.each { |f| YAML.safe_load(File.read(f), aliases: true); puts "ok #{f}" }' "${files[@]}"
