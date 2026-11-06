@@ -1,0 +1,15 @@
+# Revisão obrigatória de mantenedor / Required maintainer review.
+# O ruleset da main exige aprovação de code owner em PRs de terceiros.
+# The main branch ruleset requires code owner approval on external PRs.
+
+*                       @pedroribeirodev
+
+# Contrato da linguagem: mudanças exigem proposta, corpus e migração.
+# Language contract: changes require a proposal, corpus cases and migration notes.
+/CORE.md                @pedroribeirodev
+/GRAMMAR.md             @pedroribeirodev
+/SPEC.md                @pedroribeirodev
+/DIAGNOSTICS.md         @pedroribeirodev
+/BENCHMARK.md           @pedroribeirodev
+/LICENSE                @pedroribeirodev
+/.github/               @pedroribeirodev
