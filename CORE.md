@@ -35,7 +35,7 @@ Contrato canônico do M0, detalhado pela [gramática experimental T01](GRAMMAR.m
 **Elementos, atributos e propriedades**
 
 - O M0 aceita a lista fechada de tags e atributos HTML de [GRAMMAR.md §4](GRAMMAR.md#4-superfície-html-fechada), que guiará o corpus T02. O que estiver fora da lista gera `E006`.
-- `value`, `checked`, `disabled` e `selected` são atribuídos como propriedades DOM. `value` exige string nas tags suportadas; as outras três exigem boolean. Os demais atributos usam `setAttribute`, sujeitos às regras de presença abaixo.
+- `value`, `checked`, `disabled` e `selected` são atribuídos como propriedades DOM. `value` aceita string ou number (convertido com `String(n)`) nas tags suportadas e também define o valor padrão nativo, para que o reset de formulário funcione; as outras três exigem boolean. `download` aceita boolean (presença) ou string. Os demais atributos usam `setAttribute`, sujeitos às regras de presença abaixo.
 - Atributos booleanos do HTML seguem presença: `false` remove o atributo. `aria-*` e `data-*` recebem os textos `"true"` ou `"false"`.
 - Na inicialização, `checked`, `disabled` e `selected` sincronizam propriedade e presença do atributo. Interações, agrupamentos de controles e mudanças posteriores seguem o comportamento nativo do HTML; não há controle reativo no M0.
 - Propriedades são aplicadas após atributos e filhos. `select.value` tem precedência sobre a seleção inicial das opções; `textarea` não combina `value` com conteúdo. `input type="file"` fica fora do M0. Casos de normalização nativa e conflitos estão definidos em GRAMMAR.md.
