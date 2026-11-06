@@ -1,0 +1,35 @@
+name: Tarefa do roadmap / Roadmap task
+description: Trabalho delimitado de uma tarefa T01–T07 ou derivada. / Scoped work for a T01–T07 task or a follow-up.
+labels: ["type: task"]
+body:
+  - type: input
+    id: task
+    attributes:
+      label: Tarefa / Task
+      description: 'Ex.: T02, ou "derivada de #4". / E.g. T02, or "follow-up to #4".'
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Entrega / Deliverable
+      description: O que estará pronto ao final, em termos observáveis. / What will be done at the end, in observable terms.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependências / Dependencies
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critério de aceitação / Acceptance criteria
+      description: Como alguém confirma que terminou. Snapshots do código gerado não bastam para semântica DOM. / How someone confirms it is done. Snapshots of generated code are not enough for DOM semantics.
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Fora do escopo / Out of scope

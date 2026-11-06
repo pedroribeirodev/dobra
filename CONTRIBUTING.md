@@ -1,5 +1,7 @@
 # Contribuindo com Dobra
 
+*[English summary below](#english-summary).* Participar implica aceitar o [Código de Conduta](CODE_OF_CONDUCT.md). Vulnerabilidades seguem [SECURITY.md](SECURITY.md), nunca issue pública.
+
 **Status em 28/10/2026:** repositório de planejamento da linguagem Dobra; transpiler ainda não implementado. Licença: MIT ([LICENSE](LICENSE)). Ainda não há pacote instalável ou resultados de desempenho.
 
 ## Como queremos trabalhar
@@ -33,6 +35,35 @@ Uma proposta de sintaxe deve incluir pelo menos um exemplo de criação e um de 
 
 Uma proposta de otimização deve preservar o contrato funcional e visual e seguir [BENCHMARK.md](BENCHMARK.md). Resultados negativos e casos de regressão também são contribuições úteis. Evitar slogans de superioridade antes de executar comparações equivalentes.
 
+## Governança e decisões
+
+- **Quem decide:** por enquanto o projeto tem um único mantenedor, [@pedroribeirodev](https://github.com/pedroribeirodev), que aprova mudanças de contrato e faz merge. Essa regra deve mudar quando houver mais mantenedores, e a mudança será registrada aqui.
+- **Fonte da verdade:** CORE.md §0.1 e GRAMMAR.md definem o contrato do M0. Issues, discussões, comentários e mensagens de chat não mudam o contrato até que um PR atualize esses documentos.
+- **Fluxo de uma proposta:** ideias começam nas Discussions. Uma proposta formal usa o template de issue e recebe `status: needs-decision`. O mantenedor marca `status: accepted` ou `status: declined` com justificativa. Só depois de aceita, um PR altera o contrato, junto com os casos de corpus e uma nota de migração.
+- **Escopo:** recursos de marcos futuros recebem `out-of-scope: M0` e ficam abertos para reavaliação, sem implementação antes do marco.
+- **Merge:** a `main` aceita mudanças só por PR, com a CI passando e todas as conversas resolvidas. O [CODEOWNERS](.github/CODEOWNERS) pede a revisão do mantenedor automaticamente. Enquanto houver um único mantenedor, a aprovação não é obrigatória; ela passa a ser quando o projeto tiver contribuidores regulares.
+
+## Contribuições com ferramentas de IA
+
+Dobra é feita para pessoas e agentes, e contribuições com ajuda de IA são bem-vindas. Valem as mesmas regras de qualquer PR, e mais estas:
+
+- Uma pessoa abre o PR e responde por todo o conteúdo, inclusive o que não escreveu.
+- Comandos, saídas, medições e resultados de teste precisam ter sido realmente executados. Saída inventada leva ao fechamento do PR.
+- Prefira PRs pequenos e focados. PRs grandes e genéricos, ou várias variações do mesmo PR, podem ser fechados sem revisão detalhada.
+- Não cole no PR prompts com dados privados ou credenciais.
+
+## Labels
+
+| Label | Uso |
+| --- | --- |
+| `milestone: M0` … `milestone: M4` | Marco ao qual o trabalho pertence. |
+| `type: proposal`, `type: task`, `bug` | Tipo da issue, aplicado pelos templates. |
+| `status: needs-decision` / `accepted` / `declined` | Estado de uma proposta. |
+| `out-of-scope: M0` | Recurso válido, mas fora do marco atual. |
+| `area: grammar` / `corpus` / `compiler` / `docs` | Parte do projeto afetada. |
+| `benchmark` | Medição ou alegação de ganho; segue BENCHMARK.md. |
+| `good first issue`, `help wanted` | Boas portas de entrada. |
+
 ## Preparação do primeiro lançamento
 
 - Licença MIT adicionada em [LICENSE](LICENSE). Nome e repositório já estão definidos: Dobra, `pedroribeirodev/dobra`.
@@ -52,3 +83,14 @@ Uma proposta de otimização deve preservar o contrato funcional e visual e segu
 > Ainda não demonstramos vantagem de tokens ou runtime. Queremos medir isso publicamente, com comparações reproduzíveis e espaço para resultados que contrariem a hipótese.
 
 Repositório: [pedroribeirodev/dobra](https://github.com/pedroribeirodev/dobra). Antes de divulgar o convite, vincular tarefas abertas. Este convite é um rascunho; não foi enviado à comunidade.
+
+## English summary
+
+Dobra is in the specification phase: the transpiler does not exist yet, and no token or performance gains have been demonstrated. Main documents are in Brazilian Portuguese; issues and PRs are welcome in Portuguese or English.
+
+- **Start here:** the M0 contract is [CORE.md §0.1](CORE.md#01-decisões-fixadas-para-o-m0). Open tasks are tracked as issues labeled `type: task`, in the dependency order of the table above (T01–T07).
+- **Proposals:** discuss ideas in Discussions first, then use the proposal issue template. Only the maintainer accepts or declines; the contract changes only through a PR that updates CORE/GRAMMAR, corpus cases and migration notes.
+- **Scope:** M0 is static (components, scalar props, composition, mount/dispose). State, events, async, SSR and proofs are later milestones and get `out-of-scope: M0`.
+- **Claims:** token or performance claims must follow [BENCHMARK.md](BENCHMARK.md). Character counts are not evidence.
+- **AI-assisted contributions** are welcome. A human opens the PR, is accountable for all of it, and only reports commands and results that were actually run.
+- **Conduct and security:** follow the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
