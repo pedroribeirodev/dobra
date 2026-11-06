@@ -1,0 +1,55 @@
+name: Bug na especificação ou no compilador / Bug in the spec or compiler
+description: Contradição, ambiguidade ou comportamento incorreto. / A contradiction, ambiguity or incorrect behavior.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Status:** Dobra está em fase de especificação. O transpiler ainda não existe: não há pacote para instalar nem comando `dobra` funcional. Se você tentou instalar ou compilar, isso é esperado; veja o README.
+
+        **Status:** Dobra is in the specification phase. The transpiler does not exist yet: there is no installable package and no working `dobra` command. If you tried to install or compile, that is expected; see the README.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Onde está o problema? / Where is the problem?
+      options:
+        - Documento de especificação (CORE, GRAMMAR, SPEC, DIAGNOSTICS) / Spec document
+        - Corpus de conformidade / Conformance corpus
+        - Compilador (parser, validação, emissão) / Compiler (parser, validation, emission)
+        - Outro / Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão ou commit / Version or commit
+      description: Hash do commit ou tag. / Commit hash or tag.
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Entrada mínima / Minimal input
+      description: O menor trecho `.dobra` ou a seção do documento que mostra o problema. Não inclua dados privados. / The smallest `.dobra` snippet or document section that shows the problem. No private data.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observado / Observed
+      description: Saída, diagnóstico ou texto atual. / Current output, diagnostic or text.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Esperado e fonte / Expected and source
+      description: O que deveria acontecer e qual seção do contrato sustenta isso. / What should happen and which contract section supports it.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente / Environment
+      description: Sistema, Node, navegador ou webview com versões, quando aplicável. / OS, Node, browser or webview with versions, when relevant.
